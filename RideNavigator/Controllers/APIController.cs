@@ -18,7 +18,10 @@ namespace RideNavigator.Controllers
         [HttpGet("/location")]
         public async Task<ActionResult<string>> Location()
         {
-            var task = await new Location().Get(Request.Headers["Host"].ToString())!;
+
+            var task = await new Location().Get(
+                Request.HttpContext.Connection.RemoteIpAddress!.ToString()
+                )!;
 
             if (task == null)
             {
