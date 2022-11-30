@@ -28,5 +28,23 @@ namespace RideNavigator.Controllers
             return Ok(task);
         }
 
+
+        [HttpGet("/listings/{passengers}")]
+        public async Task<ActionResult<string>> Listings(int passengers)
+        {
+            var task = await new Listing().Get(passengers)!;
+
+            if (task == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(task);
+        }
+
+
+
+
+
     }
 }
