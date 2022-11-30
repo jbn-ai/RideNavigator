@@ -14,5 +14,19 @@ namespace RideNavigator.Controllers
             return Ok(new Candidate().Get());
         }
 
+
+        [HttpGet("/location")]
+        public async Task<ActionResult<string>> Location()
+        {
+            var task = await new Location().Get(Request.Headers["Host"].ToString())!;
+
+            if (task == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(task);
+        }
+
     }
 }
